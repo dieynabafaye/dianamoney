@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item>
+      <ion-buttons slot="start">
+        <ion-menu-button color="primary">
+          <ion-icon name="home-sharp"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <ion-icon name="sync-outline" color="primary"></ion-icon>
+        Transaction
+      </ion-title>
+      <ion-avatar slot="end">
+        <img src="../../../assets/img/logoSa.png">
+      </ion-avatar>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid >
+    <ion-row class="header-row">
+      <ion-col size="3" (click)="sortBy('date')">Date</ion-col>
+      <ion-col size="5"  tappable (click)="sortBy('user')" *ngIf="adminsys">
+        Utilisateur
+        <ion-icon  name="arrow-down" *ngIf="sortDirectionuser == 1"></ion-icon>
+        <ion-icon  name="arrow-up" *ngIf="sortDirectionuser == 2"></ion-icon>
+      </ion-col>
+      <ion-col size="5"  tappable (click)="sortBy('type')" *ngIf="useragence">
+        Type
+        <ion-icon  name="arrow-down" *ngIf="sortDirectionuser == 1"></ion-icon>
+        <ion-icon  name="arrow-up" *ngIf="sortDirectionuser == 2"></ion-icon>
+      </ion-col>
+      <ion-col size="4"  (click)="sortBy('montant')">Montant
+        <ion-icon  name="arrow-down" *ngIf="sortDirectionmontant == 1"></ion-icon>
+        <ion-icon  name="arrow-up" *ngIf="sortDirectionmontant == 2"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <section *ngIf="adminsys">
+      <ion-row *ngFor="let row of data | keyvalue; " tappable (click)="infos(row.value)">
+        <ion-col size="4">{{row.value?.date}}</ion-col>
+        <ion-col size="4">
+          {{row.value?.nom}}
+        </ion-col>
+        <ion-col size="4">{{row.value?.montant}}</ion-col>
+      </ion-row>
+    </section>
+    <section *ngIf="useragence">
+      <ion-row *ngFor="let row of data | keyvalue;">
+        <ion-col size="4">{{row.value?.date}}</ion-col>
+        <ion-col size="4">
+          {{row.value?.type}}
+        </ion-col>
+        <ion-col size="4">{{row.value?.montant}}</ion-col>
+      </ion-row>
+    </section>
+
+  </ion-grid>
+</ion-content>
+
+

@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item>
+      <ion-buttons slot="start">
+        <ion-menu-button color="primary">
+          <ion-icon name="home-sharp"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <ion-icon name="return-up-back-outline" color="primary"></ion-icon>
+        retrait
+      </ion-title>
+      <ion-avatar slot="end">
+        <img src="../../../assets/img/logoSa.png">
+      </ion-avatar>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col  size="12" size-xs="12" size-sm="10" size-md="6" size-lg="6" offset-lg="3" offset-sm="1" offset-md="3">
+        <form [formGroup]="credentials">
+          <section>
+            <ion-item>
+              <ion-label position="floating">Code</ion-label>
+              <ion-input type="text" class="form-control" formControlName="code" (change)="Recherche()"></ion-input>
+            </ion-item>
+            <div *ngIf="(code.dirty || code.touched) && code.errors" class="errors">
+              <span *ngIf="code.errors?.required">Code is required</span>
+              <span *ngIf="code.errors?.length">Code is invalid</span>
+            </div>
+          </section>
+           <ion-item class="type">
+             <ion-segment [value]="etat">
+               <ion-segment-button (click)="previous()" value="beneficiaire">
+                 <ion-label>Bénéficaire</ion-label>
+               </ion-segment-button>
+               <ion-segment-button (click)="next()" value="emetteur">
+                 <ion-label>Emetteur</ion-label>
+               </ion-segment-button>
+             </ion-segment>
+           </ion-item>
+           <section *ngIf="parti1 == 1">
+             <ion-item>
+               <ion-label position="floating">N° CNI</ion-label>
+               <ion-input type="text" class="form-control" formControlName="cni"></ion-input>
+             </ion-item>
+             <div *ngIf="(cni.dirty || cni.touched) && cni.errors" class="errors">
+               <span *ngIf="cni.errors?.required">CNI is required</span>
+               <span *ngIf="cni.errors?.length">CNI is invalid</span>
+             </div>
+             <ion-item>
+               <ion-label position="floating">Nom & Prénom</ion-label>
+               <ion-input type="text" [value]="nomEmetteur" disabled class="form-control"></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label position="floating">Montant à Recevoir</ion-label>
+               <ion-input type="text" [value]="montant" disabled class="form-control"></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label position="floating">Téléphone</ion-label>
+               <ion-input type="text" disabled class="form-control" [value]="clientRetrait.telephone"></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label position="floating">Date D'envoi</ion-label>
+               <ion-input type="text" disabled class="form-control" [value]="dateEnvoi"></ion-input>
+             </ion-item>
+             <section class="btn">
+               <ion-button shape="round" class="suivant" [disabled]="!credentials.valid" (click)="suivant()"  color="danger" expand="block" type="button">Suivant</ion-button>
+             </section>
+           </section>
+
+           <section *ngIf="parti2 == 1">
+             <ion-item>
+               <ion-label position="floating">N° CNI</ion-label>
+               <ion-input type="text" disabled [value]="clientEnvoi?.cni" class="form-control"></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label position="floating">Nom & Prénom</ion-label>
+               <ion-input type="text" [value]="nomRecepteur" disabled class="form-control"></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label position="floating">Montant ENVOYE</ion-label>
+               <ion-input type="text" [value]="montant" disabled class="form-control"></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label position="floating">Téléphone</ion-label>
+               <ion-input type="text" disabled class="form-control" [value]="clientEnvoi?.telephone"></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label position="floating">Date D'envoi</ion-label>
+               <ion-input type="text" disabled class="form-control" [value]="dateEnvoi"></ion-input>
+             </ion-item>
+             <section class="btn">
+               <ion-button shape="round" class="suivant" [disabled]="!credentials.valid"  (click)="retirer()"  color="danger" expand="block" type="button">Retirer</ion-button>
+             </section>
+           </section>
+
+
+         </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

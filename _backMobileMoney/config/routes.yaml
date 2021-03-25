@@ -1,0 +1,51 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+api_login_check:
+  path: /api/login_check
+  methods: ['POST']
+
+adding:
+  path: /api/adminSys/utilisateurs
+  controller: App\Controller\AdminSystemController::Adduser
+reset:
+  path: /api/adminSys/utilisateurs/reset
+  controller: App\Controller\AdminSystemController::ResetPassword
+UpdateUser:
+  path: /api/adminSys/utilisateurs/{id}
+  controller: App\Controller\AdminSystemController::UpdateUser
+updateCompte:
+  path: /api/adminSys/comptes/{id}
+  controller: App\Controller\CompteController::UpdateCompte
+addTransaction:
+  path: /api/transactions
+  controller: App\Controller\TransactionController::AddTransaction
+addCompte:
+  path: /api/adminSys/comptes
+  controller: App\Controller\CompteController::AddCompte
+addingAgence:
+  path: /api/agences
+  controller: App\Controller\AgenceController::AddAgence
+deleteTransaction:
+  path: /api/transactions/delete
+  controller: App\Controller\TransactionController::DeleteTransaction
+SoldeCompte:
+  path: /api/transactions/solde
+  controller: App\Controller\TransactionController::GetSolde
+
+findTransaction:
+  path: /api/transactions/find
+  controller: App\Controller\TransactionController::GetTransactionByNum
+addCalcul:
+  path: /api/calculer
+  controller: App\Controller\TransactionController::Calculatrice
+deCalcul:
+  path: /api/decalculer
+  controller: App\Controller\TransactionController::DeCalculatrice
+
+addDepot:
+  path: /api/depots
+  controller: App\Controller\DepotController::ADDdepot
+deleteDepot:
+    path: /api/depots/{id}
+    controller: App\Controller\DepotController::Deletedepot
